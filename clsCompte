@@ -1,0 +1,100 @@
+#include "clsCompte.h"
+
+clsCompte::clsCompte()
+{
+	Numero = Client = NIP = "Non Defini!";
+	Solde = -1;
+}
+
+clsCompte::clsCompte(string Numero, string Client, string NIP, float Solde)
+{
+	setNumero(Numero);
+	setClient(Client);
+	setNIP(NIP);
+	setSolde(Solde);
+}
+
+string clsCompte::getNumero()
+{
+	return Numero;
+}
+
+void clsCompte::setNumero(string Numero)
+{
+	this->Numero = Numero;
+}
+
+string clsCompte::getClient()
+{
+	return Client;
+}
+
+void clsCompte::setClient(string Client)
+{
+	this->Client = Client;
+}
+
+string clsCompte::getNIP()
+{
+	return NIP;
+}
+
+void clsCompte::setNIP(string NIP)
+{
+	this->NIP = NIP;
+}
+
+float clsCompte::getSolde()
+{
+	return Solde;
+}
+
+void clsCompte::setSolde(float Solde)
+{
+	this->Solde = Solde;
+}
+
+void clsCompte::Ouvrir(string Numero, string Client, string NIP)
+{
+	setNumero(Numero);
+	setClient(Client);
+	setNIP(NIP);
+}
+
+bool clsCompte::Deposer(int unDepot)
+{
+	int MinDepot = 2;
+	int MaxDepot = 20000;
+
+	if (unDepot < MinDepot || unDepot > MaxDepot)
+	{
+		return false;
+	}
+	else
+	{
+		Solde += unDepot;
+		return true;
+	}
+}
+
+bool clsCompte::Retirer(int unRetrait)
+{
+	int MinRetirer = 20;
+	int MultipleRetirer = 20;
+	int MaxRetirer = 500;
+
+	if (unRetrait < MinRetirer || (unRetrait % MultipleRetirer) != 0 || unRetrait > MaxRetirer || unRetrait > Solde )
+	{
+		return false;
+	}else
+	{
+		Solde -= unRetrait;
+		return true;
+	}
+
+}
+
+string clsCompte::Consulter()
+{
+	return "\t Numero : " + getNumero() + "\n" + "\t Client : " + getClient() + "\n" + "\t NIP : " + getNIP() + "\n" + "\t Solde : " + to_string(getSolde());
+}
